@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<div th:replace="fragments/fragments::head"/></div>
+<body>
+    <header>
+        <div th:replace="fragments/fragments::logo"/></div>
+        <div th:replace="fragments/fragments::navbar"/></div>
+        <div th:replace="fragments/fragments::menu_mobile"/></div>
+
+
+    </header>
+
+    <main>
+        <section class="presentation">
+
+            <div class="introduction"> 
+                <div class="intro-text">
+                    <h1>Ready to have fun?</h1>
+                    <p>Find out the best activities for you in your area. Take our personalised test and help us help you discover your new passion.</p>
+                </div>
+                <div class="cta">
+                        <button  class="cta_second" method="POST"><a class="cta_second" href="/users/signup">Sign up</a></button>
+                </div>
+            </div>
+        </section>
+        <img class="blueImg" src="img/blueImg.png" alt="blueImg">
+        <img class="drawing" src="img/coverImg.png" alt="coverImg">
+
+                <footer class="footer_cover">
+                    &copy; Hobbie 2021. All rights reserved.
+                </footer>
+
+
+    </main>
+    
+</body>
+</html>

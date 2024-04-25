@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+        <sec:session-management invalid-session-url="/login">
+            <sec:concurrency-control expired-url="/login" />
+        </sec:session-management>
+    <title>Hobbie</title>
+
+    <script>
+        function myFunction() {
+            const x = document.getElementById("click");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function selectOnlyThis(id) {
+            for (let i = 1; i <= 3; i++)
+            {
+                document.getElementById("checkbox" + i).checked = false;
+            }
+            document.getElementById(id).checked = true;
+        }
+    </script>
+</head>
+    <div th:fragment="logo" class="logo-container">
+        <th:block sec:authorize="!isAuthenticated()">
+        <a href="/">  <img class="imgHeader" src="/img/logo.svg" alt="logo"></a>
+        <a href="/">  <h4 class="logo">obbie</h4></a>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+            <a href="/default">  <img class="imgHeader" src="/img/logo.svg" alt="logo"></a>
+            <a href="/default">  <h4 class="logo">obbie</h4></a>
+        </th:block>
+    </div>
+    <nav th:fragment="navbar">
+        <ul class="nav-links">
+            <th:block sec:authorize="!isAuthenticated()">
+            <li><a class="nav-link" href="/users/register-business">MyBusiness</a></li>
+            <li><a class="nav-link" href="/users/login">Login</a></li>
+            </th:block>
+            <li sec:authorize="isAuthenticated()"><a class="nav-link" href="/">Home</a></li>
+            <li sec:authorize="hasRole('BUSINESS_USER')"><a class="nav-link" href="/hobbies/create-offer-page">NewOffer</a></li>
+            <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/test">Test</a></li>
+            <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/users/account-info">Account</a></li>
+            <li sec:authorize="hasRole('BUSINESS_USER')"><a class="nav-link" href="/users/business-account-info">Account</a></li>
+            <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/my-abos">MyHobbies</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <a href="javascript: document.logoutForm1.submit()" role="menuitem" class="nav-link"> Logout</a>
+                <form name="logoutForm1" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+
+
+      <div th:fragment="cart" sec:authorize="hasRole('USER')" class="cart">
+       <a href="/shoppingCart">  <img class="imgHeader" src="/img/cart.svg" alt="cart"></a>
+         </div>
+    <div th:fragment="menu_mobile" >
+        <button onclick="myFunction()"><img class="menu_mobile" src="/img/Grid-05.svg" alt="menu"></button>
+        <nav>
+            <ul id="click" class="popup_menu">
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li><a class="nav-link" href="/users/register-business">MyBusiness</a></li>
+                    <li><a class="nav-link" href="/users/login">Login</a></li>
+                </th:block>
+                <li sec:authorize="isAuthenticated()"><a class="nav-link" href="/">Home</a></li>
+                <li sec:authorize="hasRole('BUSINESS_USER')"><a class="nav-link" href="/hobbies/create-offer-page">NewOffer</a></li>
+                <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/test">Test</a></li>
+                <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/users/account-info">Account</a></li>
+                <li sec:authorize="hasRole('BUSINESS_USER')"><a class="nav-link" href="/users/business-account-info">Account</a></li>
+                <li sec:authorize="hasRole('USER')"><a class="nav-link" href="/my-abos">MyHobbies</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem" class="nav-link"> Logout</a>
+                    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                        <input hidden type="submit" value="Sign Out"/>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+<body>
+</body>
+</html>
